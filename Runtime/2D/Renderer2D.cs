@@ -85,7 +85,7 @@ namespace UnityEngine.Rendering.Universal
             return m_Renderer2DData;
         }
 
-        void CreateRenderTextures(
+        protected virtual void CreateRenderTextures(
             ref CameraData cameraData,
             bool forceCreateColorTexture,
             FilterMode colorTextureFilterMode,
