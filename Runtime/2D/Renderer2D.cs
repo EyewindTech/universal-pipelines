@@ -98,6 +98,7 @@ namespace UnityEngine.Rendering.Universal
             if (cameraData.renderType == CameraRenderType.Base)
             {
                 m_CreateColorTexture = forceCreateColorTexture
+                    || ForceColorTexture
                     || cameraData.postProcessEnabled
                     || cameraData.isHdrEnabled
                     || cameraData.isSceneViewCamera
@@ -291,5 +292,7 @@ namespace UnityEngine.Rendering.Universal
             if (m_CreateDepthTexture)
                 cmd.ReleaseTemporaryRT(k_DepthTextureHandle.id);
         }
+
+        internal bool ForceColorTexture;
     }
 }
