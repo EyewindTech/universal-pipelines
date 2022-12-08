@@ -85,7 +85,7 @@ namespace UnityEngine.Rendering.Universal
             return m_Renderer2DData;
         }
 
-        protected virtual void CreateRenderTextures(
+        void CreateRenderTextures(
             ref CameraData cameraData,
             bool forceCreateColorTexture,
             FilterMode colorTextureFilterMode,
@@ -98,7 +98,6 @@ namespace UnityEngine.Rendering.Universal
             if (cameraData.renderType == CameraRenderType.Base)
             {
                 m_CreateColorTexture = forceCreateColorTexture
-                    || ForceColorTexture
                     || cameraData.postProcessEnabled
                     || cameraData.isHdrEnabled
                     || cameraData.isSceneViewCamera
@@ -251,8 +250,7 @@ namespace UnityEngine.Rendering.Universal
                     depthTargetHandle,
                     colorGradingLutHandle,
                     requireFinalPostProcessPass,
-                    postProcessDestHandle == RenderTargetHandle.CameraTarget,
-                    hasPassesAfterPostProcessing);
+                    postProcessDestHandle == RenderTargetHandle.CameraTarget);
 
                 EnqueuePass(postProcessPass);
                 colorTargetHandle = postProcessDestHandle;
@@ -292,7 +290,5 @@ namespace UnityEngine.Rendering.Universal
             if (m_CreateDepthTexture)
                 cmd.ReleaseTemporaryRT(k_DepthTextureHandle.id);
         }
-
-        internal bool ForceColorTexture;
     }
 }

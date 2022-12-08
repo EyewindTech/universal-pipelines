@@ -44,7 +44,7 @@ The Deferred Rendering Path has the following requirements and limitations on to
 
 * Minimum Shader Model: Shader Model 4.5.
 
-* Deferred Rendering Path does not support the OpenGL-based graphics API: Desktop&#160;OpenGL, OpenGL&#160;ES&#160;2.0, OpenGL&#160;ES&#160;3.0, WebGL&#160;1.0, WebGL&#160;2.0.
+* Deferred Rendering Path does not support the OpenGL and OpenGL ES API.<br/>If a project with the Deferred Rendering Path is built for platforms using those API, the application falls back to the Forward Rendering Path.
 
 ## Implementation details
 
@@ -68,13 +68,15 @@ This field contains the albedo color in sRGB format, 24 bits.
 
 This field is a bit field that contains Material flags:
 
-* Bit 1, **ReceiveShadowsOff**: if set, the pixel does not receive dynamic shadows.
+* Bit 0, **ReceiveShadowsOff**: if set, the pixel does not receive dynamic shadows.
 
-* Bit 2, **SpecularHighlightsOff**: if set, the pixel does not receive specular highlights.
+* Bit 1, **SpecularHighlightsOff**: if set, the pixel does not receive specular highlights.
 
-* Bit 4, **SubtractiveMixedLighting**: if set, the pixel uses subtractive mixed lighting.
+* Bit 2, **SubtractiveMixedLighting**: if set, the pixel uses subtractive mixed lighting.
 
-* Bit 8, **SpecularSetup**: if set, the Material uses the specular workflow.
+* Bit 3, **SpecularSetup**: if set, the Material uses the specular workflow.
+
+Bits 4-7 are reserved for future use.
 
 For more technical details, see the file `/ShaderLibrary/UnityGBuffer.hlsl`.
 
